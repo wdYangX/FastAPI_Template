@@ -1,0 +1,8 @@
+fastapi
+pydantic
+sqlalchemy
+python-dotenv
+uvicorn
+passlib
+async-exit-stack
+async-generator
