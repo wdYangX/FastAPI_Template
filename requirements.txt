@@ -6,3 +6,4 @@ uvicorn
 passlib
 async-exit-stack
 async-generator
+pymysql

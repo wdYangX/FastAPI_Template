@@ -1,12 +1,17 @@
 from typing import Any, List
+import json
 
 from fastapi import APIRouter, Body, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
 from pydantic.networks import EmailStr
 from sqlalchemy.orm import Session
+from starlette.responses import Response
 from src.api.utils.common import get_db
 
-from src import models, schemas
+from src.models import User
+from src import schemas
+from src.core.return_messages import codes, ptBr
+from src.api.message import Message
 # from src.core.config import settings
 
 router = APIRouter()
@@ -15,17 +20,18 @@ router = APIRouter()
     '/get_user/{token}'
 )
 async def retrieve_user(
-        token
+        token,
+        db: Session = Depends(get_db),
 ):
-    # user = db.query(User).filter(User.id == str(user_id)).first()
-    # if not user:
-    #     return Response(json.dumps({
-    #         "messageCode": codes['db'],
-    #         "message": ptBr['eUserNotFound']
-    #     }),
-    #         status_code=404)
+    user = db.query(User).filter(User.Token == str(token)).first()
+    if not user:
+        return Response(json.dumps({
+                    "messageCode": codes['db'],
+                    "message": ptBr['eUserNotFound']
+                }),
+                    status_code=404)
     
-    return ''
+    return user
 
 
 @router.post(
