@@ -22,6 +22,7 @@ class CRUDUser(CRUDBase):
         else:
             update_data = obj_in.dict(exclude_unset=True)
 
+        # TODO: Must be check Country_ID
         for field in obj_data:
             if field in update_data:
                 setattr(db_obj, field, update_data[field])
