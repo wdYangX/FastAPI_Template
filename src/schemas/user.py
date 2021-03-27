@@ -17,18 +17,33 @@ class UserBase(BaseModel):
 
 
 # Properties to receive via API on creation
-class UserCreate(UserBase):
+class UserCreate(BaseModel):
+    ID: Optional[int] = None
     Username: str
     Password: str
 
 
 # Properties to receive via API on update
-class UserUpdate(UserBase):
-    Password: Optional[str] = None
+class UserUpdate(BaseModel):
+    Username: str
+    Password: Optional[str]
+    First_Name: str
+    Last_Name: str
+    Phone: str
+    Email: EmailStr
+    Country_ID: int
 
 
 class UserInDBBase(UserBase):
     ID: Optional[int] = None
+    Username: str
+    Password: str
+    Token: str
+    First_Name: Optional[str] = None
+    Last_Name: Optional[str] = None
+    Phone: Optional[str] = None
+    Email: Optional[str] = None
+    Country_ID: Optional[int] = None
 
     class Config:
         orm_mode = True

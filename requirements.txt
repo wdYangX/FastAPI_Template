@@ -7,3 +7,5 @@ passlib
 async-exit-stack
 async-generator
 pymysql
+bcrypt
+flask_hashing

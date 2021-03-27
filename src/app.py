@@ -1,8 +1,6 @@
-
 from fastapi import FastAPI
-from sqlalchemy.schema import MetaData
+from src.db.base import Base
+
 
 app: FastAPI = FastAPI()
-
-# from src.db.base import Base
-# db = Base.metadata
+db = Base.metadata
